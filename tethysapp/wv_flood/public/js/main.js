@@ -15,7 +15,7 @@ var FloodMap =  new ol.source.TileWMS({
         url:'http://geoserver.byu.edu/arcgis/services/West_Virginia_Flood/Flood_' + range_input + '/MapServer/WmsServer?',
 
         params:{
-            LAYERS:"2",
+            LAYERS:"0",
 //            FORMAT:"image/png", //Not a necessary line, but maybe useful if needed later
         },
         crossOrigin: 'Anonymous' //This is necessary for CORS security in the browser

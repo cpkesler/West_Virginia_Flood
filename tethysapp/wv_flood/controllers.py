@@ -118,7 +118,7 @@ def home(request):
     if forecast_range and forecast_date and comid_time:
 
         # Only using one COMID for forecast data
-        comid = '18229923'
+        comid = '12107522'
 
         # URL for getting forecast data and put in a list
         time_series_list_api = []
@@ -149,52 +149,32 @@ def home(request):
                 value2 = float(value1)
                 value_round = round(value2)
                 value_round_int = int(value_round)
-                if value_round_int < 90201:
+                if value_round_int < 36351:
                     value_round_int = 0
-                elif value_round_int >= 90201 and value_round_int < 95274:
-                    value_round_int = 0.5
-                elif value_round_int >= 95274 and value_round_int < 103147:
+                elif value_round_int >= 36351 and value_round_int < 41646:
                     value_round_int = 1
-                elif value_round_int >= 103147 and value_round_int < 111671:
-                    value_round_int = 1.5
-                elif value_round_int >= 111671 and value_round_int < 120899:
+                elif value_round_int >= 41646 and value_round_int < 46491:
                     value_round_int = 2
-                elif value_round_int >= 120899 and value_round_int < 130890:
-                    value_round_int = 2.5
-                elif value_round_int >= 130890 and value_round_int < 141706:
+                elif value_round_int >= 46491 and value_round_int < 52236:
                     value_round_int = 3
-                elif value_round_int >= 141706 and value_round_int < 153417:
-                    value_round_int = 3.5
-                elif value_round_int >= 153417 and value_round_int < 166095:
+                elif value_round_int >= 52236 and value_round_int < 57531:
                     value_round_int = 4
-                elif value_round_int >= 166095 and value_round_int < 179820:
-                    value_round_int = 4.5
-                elif value_round_int >= 179820 and value_round_int < 194680:
+                elif value_round_int >= 57531 and value_round_int < 62826:
                     value_round_int = 5
-                elif value_round_int >= 194680 and value_round_int < 210768:
-                    value_round_int = 5.5
-                elif value_round_int >= 210768 and value_round_int < 228185:
+                elif value_round_int >= 62826 and value_round_int < 68121:
                     value_round_int = 6
-                elif value_round_int >= 228185 and value_round_int < 247042:
-                    value_round_int = 6.5
-                elif value_round_int >= 247042 and value_round_int < 267457:
+                elif value_round_int >= 68121 and value_round_int < 73416:
                     value_round_int = 7
-                elif value_round_int >= 267457 and value_round_int < 289559:
-                    value_round_int = 7.5
-                elif value_round_int >= 289559 and value_round_int < 313487:
+                elif value_round_int >= 73416 and value_round_int < 78711:
                     value_round_int = 8
-                elif value_round_int >= 313487 and value_round_int < 339393:
-                    value_round_int = 8.5
-                elif value_round_int >= 339393 and value_round_int < 367439:
+                elif value_round_int >= 78711 and value_round_int < 84006:
                     value_round_int = 9
-                elif value_round_int >= 367439 and value_round_int < 397803:
-                    value_round_int = 9.5
-                elif value_round_int >= 397803 and value_round_int < 430677:
+                elif value_round_int >= 84006 and value_round_int < 89301:
                     value_round_int = 10
-                elif value_round_int >= 430677 and value_round_int < 466267:
-                    value_round_int = 10.5
-                elif value_round_int >= 466267:
+                elif value_round_int >= 94596 and value_round_int < 99891:
                     value_round_int = 11
+                elif value_round_int >= 99891:
+                    value_round_int = 12
 
                 house_count_list.append(house_count_dict[value_round_int])
                 time_series_list_api.append(value_round_int)
