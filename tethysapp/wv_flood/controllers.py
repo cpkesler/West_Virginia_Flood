@@ -5,6 +5,8 @@ import urllib2
 from tethys_sdk.gizmos import DatePicker
 from tethys_sdk.gizmos import Button
 from tethys_sdk.gizmos import SelectInput
+from datetime import datetime, timedelta
+
 
 @login_required()
 def home(request):
@@ -21,17 +23,21 @@ def home(request):
     # Find current time
     t_now = datetime.now()
     now_str = "{0}-{1}-{2}".format(t_now.year,check_digit(t_now.month),check_digit(t_now.day))
+    two_weeks = timedelta(days=14)
+    t_2_weeks_ago = t_now - two_weeks
+    two_weeks_ago_str = "{0}-{1}-{2}".format(t_2_weeks_ago.year, check_digit(t_2_weeks_ago.month),
+                                             check_digit(t_2_weeks_ago.day))
 
     # Forecast size dropdown
     forecast_range_select = SelectInput(display_text='Forecast Size',
                                         name='forecast_range',
                                         multiple=False,
-                                        options=[ ('Short', 'short_range'), ('Medium', 'medium_range')],
+                                        options=[ ('Short', 'short_range'), ('Medium', 'medium_range'), ('Analysis & Assimilation', 'analysis_assim')],
                                         initial=['medium_range'],
                                         original=['medium_range'])
 
-    # Forecat date selector
-    forecast_date_picker = DatePicker(name='forecast_date',
+    # Forecast start date selector
+    forecast_date_picker_start = DatePicker(name='forecast_date_start',
                                       display_text='Forecast Date Start',
                                       end_date='0d',
                                       autoclose=True,
@@ -39,6 +45,18 @@ def home(request):
                                       start_view='month',
                                       today_button=True,
                                       initial=now_str)
+
+    # Forecast date end selector, for analysis and assimilation only
+    forecast_date_picker_end = DatePicker(name='forecast_date_end',
+                                      display_text='Forecast Date End',
+                                      end_date='0d',
+                                      autoclose=True,
+                                      format='yyyy-mm-dd',
+                                      start_view='month',
+                                      today_button=True,
+                                      initial=two_weeks_ago_str)
+
+
 
     # Forecast time selector
     forecast_time_select = SelectInput(display_text='Start Time',
@@ -96,7 +114,8 @@ def home(request):
 
     # I'm defining the context here because the items contained in this context are used  below (more items are added further down)
     context = {"forecast_range_select": forecast_range_select,
-               "forecast_date_picker": forecast_date_picker,
+               "forecast_date_picker_end": forecast_date_picker_end,
+               "forecast_date_picker_start": forecast_date_picker_start,
                "forecast_time_select": forecast_time_select,
                "get_forecast": get_forecast,
                "get_increase": get_increase,
@@ -104,18 +123,18 @@ def home(request):
 
     # Get input from gizmos
     forecast_range = None
-    forecast_date = None
+    forecast_date_start = None
     comid_time = None
 
     if request.GET.get('forecast_range'):
         forecast_range = request.GET['forecast_range']
-    if request.GET.get('forecast_date'):
-        forecast_date = request.GET['forecast_date']
+    if request.GET.get('forecast_date_start'):
+        forecast_date_start = request.GET['forecast_date_start']
     if request.GET.get('comid_time'):
         comid_time = request.GET['comid_time']
 
     # Get forecast data
-    if forecast_range and forecast_date and comid_time:
+    if forecast_range and forecast_date_start and comid_time:
 
         # Only using one COMID for forecast data
         comid = '12107522'
@@ -129,15 +148,13 @@ def home(request):
             comid_time = "06"
             if forecast_size == "short_range":
                 comid_time = request.GET['comid_time']
-            # print comid_time
-            # print comid
-            # print forecast_date
             forecast_date_end = now_str
-            url = 'https://apps.hydroshare.org/apps/nwm-forecasts/api/GetWaterML/?config={0}&geom=channel_rt&variable=streamflow&COMID={1}&lon=&lat=&startDate={2}&endDate={3}&time={4}&lag={5}'.format(forecast_range, comid, forecast_date, forecast_date_end, comid_time, lag)
+            if forecast_range == "analysis_assim":
+                forecast_date_end = request.GET['forecast_date_end']
+            url = 'https://apps.hydroshare.org/apps/nwm-forecasts/api/GetWaterML/?config={0}&geom=channel_rt&variable=streamflow&COMID={1}&lon=&lat=&startDate={2}&endDate={3}&time={4}&lag={5}'.format(forecast_range, comid, forecast_date_start, forecast_date_end, comid_time, lag)
             print url
             url_api = urllib2.urlopen(url)
             data_api = url_api.read()
-            # print data_api
             x = data_api.split('dateTimeUTC=')
             x.pop(0)
 
@@ -179,12 +196,16 @@ def home(request):
                 house_count_list.append(house_count_dict[value_round_int])
                 time_series_list_api.append(value_round_int)
 
+            length = len(time_series_list_api)
+
             # print time_series_list_api
             # Put forecast data ito a numbered list based on short or medium range
             if forecast_range == 'short_range':
-                range_slider = range(1, 16)
+                range_slider = range(1, length + 1)
             elif forecast_range == 'medium_range':
-                range_slider = range(1,81)
+                range_slider = range(1, length + 1)
+            elif forecast_range == 'analysis_assim':
+                range_slider = range(1, length + 1)
             # range_list = zip(range_slider, time_series_list_api)
             range_list = [list(a) for a in zip(range_slider, time_series_list_api, house_count_list)]
             # print range_list

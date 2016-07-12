@@ -33,7 +33,8 @@
 
   <h6>Flood Forecast</h6>
     {% gizmo select_input forecast_range_select %}
-    {% gizmo date_picker forecast_date_picker %}
+    {% gizmo date_picker forecast_date_picker_start %}
+    {% gizmo date_picker forecast_date_picker_end %}
     {% gizmo select_input forecast_time_select %}
     {% gizmo button get_forecast %}
 </form>

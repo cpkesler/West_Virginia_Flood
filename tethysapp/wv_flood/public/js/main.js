@@ -4,7 +4,7 @@ var projection = ol.proj.get('EPSG:3857');
 //Define Basemap
 //Here we are declaring the raster layer as a separate object to put in the map later
 var baseLayer = new ol.layer.Tile({
-    source: new ol.source.MapQuest({layer: 'osm'})
+    source: new ol.source.OSM({})
 });
 
 var range_length = range_list.length
@@ -83,11 +83,11 @@ map.addControl(new ol.control.ZoomSlider());
 
 //Here we set the styles and inital setting for the slider bar (https://jqueryui.com/slider/#steps)
 $(function() {
-        if (window.location.search.indexOf('short_range') != -1) {
-            var label_text = window.location.search.indexOf('flood_forecast') != -1 ? 'Time Step (hour):' : 'Flood Depth (meter):'
+        if (window.location.search.indexOf('medium_range') != -1) {
+            var label_text = window.location.search.indexOf('flood_forecast') != -1 ? 'Time Step (x3 hours):' : 'Flood Depth (meter):'
         }
         else {
-            var label_text = window.location.search.indexOf('flood_forecast') != -1 ? 'Time Step (x3 hours):' : 'Flood Depth (meter):'
+            var label_text = window.location.search.indexOf('flood_forecast') != -1 ? 'Time Step (hour):' : 'Flood Depth (meter):'
         }
     $( "#label" ).text(label_text)
     $( "#slider" ).slider({
