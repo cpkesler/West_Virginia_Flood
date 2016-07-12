@@ -6,9 +6,9 @@ class WestVirginiaFlood(TethysAppBase):
     Tethys app class for West Virginia Flood.
     """
 
-    name = 'West Virginia Flood'
+    name = 'West Virginia HAND Flood Map'
     index = 'wv_flood:home'
-    icon = 'wv_flood/images/icon.gif'
+    icon = 'wv_flood/images/wv_image.png'
     package = 'wv_flood'
     root_url = 'wv-flood'
     color = '#f1c40f'

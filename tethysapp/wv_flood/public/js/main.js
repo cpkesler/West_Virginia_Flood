@@ -4,8 +4,11 @@ var projection = ol.proj.get('EPSG:3857');
 //Define Basemap
 //Here we are declaring the raster layer as a separate object to put in the map later
 var baseLayer = new ol.layer.Tile({
-    source: new ol.source.OSM({})
-});
+    source: new ol.source.BingMaps({
+        key: '5TC0yID7CYaqv3nVQLKe~xWVt4aXWMJq2Ed72cO4xsA~ApdeyQwHyH_btMjQS1NJ7OHKY8BK-W-EMQMrIavoQUMYXeZIQOUURnKGBOC7UCt4',
+        imagerySet: 'AerialWithLabels'  // Options 'Aerial', 'AerialWithLabels', 'Road'
+        })
+    });
 
 var range_length = range_list.length
 var range_input = range_list[0].toString().split(".").join("")
