@@ -158,7 +158,6 @@ def home(request):
             x = data_api.split('dateTimeUTC=')
             x.pop(0)
 
-
             for elm in x:
                 info = elm.split(' ')
                 value = info[7].split('<')
@@ -192,6 +191,41 @@ def home(request):
                     value_round_int = 11
                 elif value_round_int >= 99891:
                     value_round_int = 12
+
+            # Use this for testing the forecast functionality because there probably won't be a flood very often
+            # for elm in x:
+            #     info = elm.split(' ')
+            #     value = info[7].split('<')
+            #     value1 = value[0].replace('>', '')
+            #     value2 = float(value1)
+            #     value_round = round(value2)
+            #     value_round_int = int(value_round)
+            #     if value_round_int < 100:
+            #         value_round_int = 0
+            #     elif value_round_int >= 100 and value_round_int < 200:
+            #         value_round_int = 1
+            #     elif value_round_int >= 200 and value_round_int < 300:
+            #         value_round_int = 2
+            #     elif value_round_int >= 300 and value_round_int < 400:
+            #         value_round_int = 3
+            #     elif value_round_int >= 400 and value_round_int < 500:
+            #         value_round_int = 4
+            #     elif value_round_int >= 500 and value_round_int < 600:
+            #         value_round_int = 5
+            #     elif value_round_int >= 600 and value_round_int < 700:
+            #         value_round_int = 6
+            #     elif value_round_int >= 700 and value_round_int < 800:
+            #         value_round_int = 7
+            #     elif value_round_int >= 73416 and value_round_int < 78711:
+            #         value_round_int = 8
+            #     elif value_round_int >= 78711 and value_round_int < 84006:
+            #         value_round_int = 9
+            #     elif value_round_int >= 84006 and value_round_int < 89301:
+            #         value_round_int = 10
+            #     elif value_round_int >= 94596 and value_round_int < 99891:
+            #         value_round_int = 11
+            #     elif value_round_int >= 99891:
+            #         value_round_int = 12
 
                 house_count_list.append(house_count_dict[value_round_int])
                 time_series_list_api.append(value_round_int)

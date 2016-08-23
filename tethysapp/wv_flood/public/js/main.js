@@ -105,9 +105,6 @@ $(function() {
         var url = 'http://geoserver.byu.edu/arcgis/services/West_Virginia_Flood/Flood_' + decimal_value + '/MapServer/WmsServer?';
         LandCover.setUrl(url);
         FloodMap.setUrl(url);
-        $( "#house_count").text(range_list[ui.value - 1][2]);
-
       }
     });
-    $( "#amount" ).val( $( "#slider" ).slider( "value" ) );
   });
