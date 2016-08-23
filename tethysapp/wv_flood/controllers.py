@@ -32,7 +32,7 @@ def home(request):
     forecast_range_select = SelectInput(display_text='Forecast Size',
                                         name='forecast_range',
                                         multiple=False,
-                                        options=[ ('Short', 'short_range'), ('Medium', 'medium_range'), ('Analysis & Assimilation', 'analysis_assim')],
+                                        options=[ ('Short', 'short_range'), ('Medium', 'medium_range')],
                                         initial=['medium_range'],
                                         original=['medium_range'])
 
