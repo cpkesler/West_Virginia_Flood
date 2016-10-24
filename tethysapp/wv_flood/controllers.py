@@ -32,7 +32,10 @@ def home(request):
     forecast_range_select = SelectInput(display_text='Forecast Size',
                                         name='forecast_range',
                                         multiple=False,
-                                        options=[ ('Short', 'short_range'), ('Medium', 'medium_range')],
+                                        options=[ ('Short', 'short_range'),
+                                                  ('Medium', 'medium_range'),
+                                                  ('Analysis & assimilation', 'analysis_assim')
+                                                  ],
                                         initial=['medium_range'],
                                         original=['medium_range'])
 
@@ -54,7 +57,7 @@ def home(request):
                                       format='yyyy-mm-dd',
                                       start_view='month',
                                       today_button=True,
-                                      initial=two_weeks_ago_str)
+                                      initial=now_str)
 
 
 
