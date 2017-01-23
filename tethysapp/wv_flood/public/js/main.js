@@ -56,7 +56,7 @@ var view = new ol.View({
         center: [-8940000, 4551000],
         projection: projection,
         zoom: 13,
-    })
+    });
 
 //Declare the map object itself.
 var map = new ol.Map({

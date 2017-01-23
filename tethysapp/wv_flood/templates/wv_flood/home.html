@@ -27,9 +27,6 @@
 
   <form id='forecast-form' action="{% url 'wv_flood:home' %}" method="get">
       {% csrf_token %}
-  <!--<h5>Manual Method</h5>-->
-    <!--{% gizmo text_input depth_input %}-->
-    <!--{% gizmo button get_flood %}-->
 
   <h6>Flood Forecast</h6>
     {% gizmo select_input forecast_range_select %}
@@ -41,7 +38,6 @@
 {% endblock %}
 
 {% block app_content %}
-<!-- This extra bit of style defines the size of the "map" div tag area that shows up later -->
     <style>
       .map {
         height: 600px;
@@ -51,13 +47,12 @@
 
 <h5><b>Forecast Slider</b></h5>
 
-<!--Forecast slider bar-->
+{# Forecast slider bar #}
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <title>jQuery UI Slider - Snap to increments</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <!--<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 <body>
@@ -69,7 +64,7 @@
 </body>
 </html>
 
-<!--div tag for map-->
+{# div tag for map #}
     <div id="map" class="map"></div>
 {% endblock %}
 
